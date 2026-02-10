@@ -23,9 +23,9 @@ const resources = {
 
 // Get default language from build configuration or environment
 const getDefaultLanguage = () => {
-  // In development mode, always use English
+  // In development mode, always use German
   if (import.meta.env.DEV) {
-    return "en";
+    return "de";
   }
 
   // Try to get from build-time variable first
@@ -42,16 +42,16 @@ const getDefaultLanguage = () => {
   }
 
   // Final fallback
-  return "en";
+  return "de";
 };
 
 const defaultLanguage = getDefaultLanguage();
 
 // Force clear localStorage in development mode
 if (import.meta.env.DEV) {
-  console.log("Development mode detected - forcing English language");
+  console.log("Development mode detected - forcing German language");
   localStorage.removeItem("i18nextLng");
-  localStorage.setItem("i18nextLng", "en");
+  localStorage.setItem("i18nextLng", "de");
 }
 
 i18n
@@ -64,7 +64,7 @@ i18n
   // Initialize i18next
   .init({
     resources,
-    lng: import.meta.env.DEV ? "en" : defaultLanguage, // Force English in development
+    lng: import.meta.env.DEV ? "de" : defaultLanguage, // Force German in development
     fallbackLng: "en", // Always fallback to English
     debug: import.meta.env.DEV, // Enable debug in development
 
@@ -80,14 +80,14 @@ i18n
 
 // In development, add a global function to reset language
 if (import.meta.env.DEV) {
-  window.resetLanguageToEnglish = () => {
+  window.resetLanguageToGerman = () => {
     localStorage.removeItem("i18nextLng");
-    localStorage.setItem("i18nextLng", "en");
-    i18n.changeLanguage("en");
+    localStorage.setItem("i18nextLng", "de");
+    i18n.changeLanguage("de");
     window.location.reload();
   };
   console.log(
-    "Development mode: Use resetLanguageToEnglish() in console to reset language to English"
+    "Development mode: Use resetLanguageToGerman() in console to reset language to German"
   );
   console.log(`Current language set to: ${i18n.language}`);
 }

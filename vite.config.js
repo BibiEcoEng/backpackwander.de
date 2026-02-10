@@ -4,8 +4,14 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig(() => {
-  // Get the default language from environment variable or fallback to Serbian
-  const defaultLang = process.env.VITE_DEFAULT_LANG || "sr";
+  // Get the default language from environment variable or fallback to German
+  const defaultLang = process.env.VITE_DEFAULT_LANG || "de";
+
+  // Use standard 'dist' for production builds (no env var), language-specific for local builds
+  const outDir = process.env.VITE_DEFAULT_LANG ? `dist-${defaultLang}` : 'dist';
+
+  // Use standard index.html for production, language-specific for local builds
+  const inputHtml = process.env.VITE_DEFAULT_LANG ? `./index-${defaultLang}.html` : './index.html';
 
   return {
     plugins: [
@@ -33,9 +39,9 @@ export default defineConfig(() => {
       __DEFAULT_LANGUAGE__: JSON.stringify(defaultLang),
     },
     build: {
-      outDir: `dist-${defaultLang}`,
+      outDir: outDir,
       rollupOptions: {
-        input: `./index-${defaultLang}.html`,
+        input: inputHtml,
         output: {
           // Generate different chunk names for different builds
           chunkFileNames: `assets/[name]-${defaultLang}-[hash].js`,
