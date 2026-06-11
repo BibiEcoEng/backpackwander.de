@@ -42,7 +42,22 @@ export function Footer() {
       <div className="section-shell">
         <div className="footer-grid">
           <div className="footer-col footer-col-brand">
-            <p className="footer-text footer-brand-copy">{content.footer.brandDescription}</p>
+            <p className="footer-text footer-brand-copy">
+              <span className="footer-brand-copy-desktop">
+                {content.footer.brandDescriptionDesktopLines.map((line) => (
+                  <span key={line} className="footer-brand-copy-line">
+                    {line}
+                  </span>
+                ))}
+              </span>
+              <span className="footer-brand-copy-mobile">
+                {content.footer.brandDescriptionMobileLines.map((line) => (
+                  <span key={line} className="footer-brand-copy-line">
+                    {line}
+                  </span>
+                ))}
+              </span>
+            </p>
             <ul className="footer-divisions">
               {technicalDivisions.map((division) => (
                 <li key={division.url}>

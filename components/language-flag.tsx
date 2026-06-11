@@ -22,8 +22,6 @@ export function LanguageFlag({ code, className }: LanguageFlagProps) {
     );
   }
 
-  const stripeHeight = 16 / 13;
-
   return (
     <svg
       viewBox="0 0 24 16"
@@ -31,34 +29,11 @@ export function LanguageFlag({ code, className }: LanguageFlagProps) {
       aria-hidden="true"
       role="img"
     >
-      {Array.from({ length: 13 }, (_, index) => (
-        <rect
-          key={index}
-          y={index * stripeHeight}
-          width="24"
-          height={stripeHeight}
-          fill={index % 2 === 0 ? '#B22234' : '#FFFFFF'}
-        />
-      ))}
-      <rect width="9.6" height={stripeHeight * 7} fill="#3C3B6E" />
-      {[
-        [1.2, 1.1],
-        [2.4, 1.1],
-        [3.6, 1.1],
-        [4.8, 1.1],
-        [1.8, 2.3],
-        [3.0, 2.3],
-        [4.2, 2.3],
-        [1.2, 3.5],
-        [2.4, 3.5],
-        [3.6, 3.5],
-        [4.8, 3.5],
-        [1.8, 4.7],
-        [3.0, 4.7],
-        [4.2, 4.7]
-      ].map(([cx, cy], index) => (
-        <circle key={index} cx={cx} cy={cy} r="0.45" fill="#FFFFFF" />
-      ))}
+      <rect width="24" height="16" fill="#012169" />
+      <path d="M0,0 L24,16 M24,0 L0,16" stroke="#FFFFFF" strokeWidth="3.2" />
+      <path d="M0,0 L24,16 M24,0 L0,16" stroke="#C8102E" strokeWidth="1.6" />
+      <path d="M9.6,0 H14.4 V16 H9.6 Z M0,5.6 H24 V10.4 H0 Z" fill="#FFFFFF" />
+      <path d="M10.8,0 H13.2 V16 H10.8 Z M0,6.8 H24 V9.2 H0 Z" fill="#C8102E" />
     </svg>
   );
 }

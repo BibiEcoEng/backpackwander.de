@@ -1,13 +1,18 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { siteConfig, seoKeywords } from '@/lib/site';
-import { getLocaleFromHost, getLocalizedPath, isLocale, type Locale } from '@/lib/routing';
+import { defaultLocale, getLocalizedPath, getLocaleFromHost, resolveLocale, type Locale } from '@/lib/routing';
 
-export function getRequestLanguage() {
-  return headers().then((requestHeaders) => {
-    const host = requestHeaders.get('x-forwarded-host') ?? requestHeaders.get('host') ?? '';
-    return getLocaleFromHost(host);
-  });
+export async function getRequestLanguage(): Promise<Locale> {
+  const requestHeaders = await headers();
+  const headerLocale = requestHeaders.get('x-locale');
+
+  if (headerLocale) {
+    return resolveLocale(headerLocale);
+  }
+
+  const host = requestHeaders.get('x-forwarded-host') ?? requestHeaders.get('host') ?? '';
+  return getLocaleFromHost(host);
 }
 
 export async function getRequestBaseUrl() {
@@ -16,17 +21,23 @@ export async function getRequestBaseUrl() {
 
 export async function getRequestLocale(): Promise<Locale> {
   const requestHeaders = await headers();
-  const headerLocale = requestHeaders.get('x-locale');
-
-  if (isLocale(headerLocale)) {
-    return headerLocale;
-  }
-
-  const host = requestHeaders.get('x-forwarded-host') ?? requestHeaders.get('host') ?? '';
-  return getLocaleFromHost(host);
+  return resolveLocale(requestHeaders.get('x-locale'));
 }
 
-function buildSharedSocialMetadata(title: string, description: string, canonicalUrl: string): Pick<Metadata, 'openGraph' | 'twitter'> {
+function buildLanguageAlternates(path: string) {
+  return {
+    'x-default': `${siteConfig.domains.de}${getLocalizedPath(defaultLocale, path)}`,
+    de: `${siteConfig.domains.de}${getLocalizedPath('de', path)}`,
+    en: `${siteConfig.domains.en}${getLocalizedPath('en', path)}`
+  };
+}
+
+function buildSharedSocialMetadata(
+  locale: Locale,
+  title: string,
+  description: string,
+  canonicalUrl: string
+): Pick<Metadata, 'openGraph' | 'twitter'> {
   const ogImage = siteConfig.seo.defaultOgImage;
 
   return {
@@ -36,7 +47,7 @@ function buildSharedSocialMetadata(title: string, description: string, canonical
       url: canonicalUrl,
       siteName: siteConfig.name,
       type: 'website',
-      locale: canonicalUrl.includes('/de') ? 'de_DE' : 'en_US',
+      locale: locale === 'de' ? 'de_DE' : 'en_US',
       images: [
         {
           url: ogImage,
@@ -56,20 +67,19 @@ function buildSharedSocialMetadata(title: string, description: string, canonical
 }
 
 export async function buildPageMetadata(title: string, description: string, path: string): Promise<Metadata> {
-  const baseUrl = await getRequestBaseUrl();
-  const canonicalUrl = `${baseUrl}${path}`;
+  const locale = await getRequestLanguage();
+  const baseUrl = locale === 'de' ? siteConfig.domains.de : siteConfig.domains.en;
+  const localizedPath = getLocalizedPath(locale, path);
+  const canonicalUrl = `${baseUrl}${localizedPath}`;
 
   return {
     title,
     description,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        en: `${siteConfig.domains.en}${path}`,
-        de: `${siteConfig.domains.de}${path}`
-      }
+      languages: buildLanguageAlternates(path)
     },
-    ...buildSharedSocialMetadata(title, description, canonicalUrl)
+    ...buildSharedSocialMetadata(locale, title, description, canonicalUrl)
   };
 }
 
@@ -85,11 +95,8 @@ export function buildLocalizedPageMetadata(locale: Locale, title: string, descri
     keywords,
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        en: `${siteConfig.domains.en}${getLocalizedPath('en', path)}`,
-        de: `${siteConfig.domains.de}${getLocalizedPath('de', path)}`
-      }
+      languages: buildLanguageAlternates(path)
     },
-    ...buildSharedSocialMetadata(title, description, canonicalUrl)
+    ...buildSharedSocialMetadata(locale, title, description, canonicalUrl)
   };
 }

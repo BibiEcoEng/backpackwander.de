@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { defaultLocale } from '@/lib/routing';
 import { languageOptions, translations, type LanguageCode, type LanguageOption, type Translations } from '@/lib/translations';
 
 type PlainObject = Record<string, unknown>;
@@ -39,7 +40,7 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-export function LanguageProvider({ children, initialLanguage = 'de' }: { children: React.ReactNode; initialLanguage?: LanguageCode }) {
+export function LanguageProvider({ children, initialLanguage = defaultLocale }: { children: React.ReactNode; initialLanguage?: LanguageCode }) {
   const [language, setLanguageState] = useState<LanguageCode>(initialLanguage);
 
   useEffect(() => {
@@ -52,7 +53,7 @@ export function LanguageProvider({ children, initialLanguage = 'de' }: { childre
     }
 
     const option = languageOptions.find((item) => item.code === language);
-    document.documentElement.lang = option?.htmlLang ?? 'en';
+    document.documentElement.lang = option?.htmlLang ?? defaultLocale;
   }, [language]);
 
   const value = useMemo<LanguageContextValue>(() => {

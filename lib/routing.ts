@@ -1,17 +1,19 @@
 import { siteConfig } from '@/lib/site';
 import type { LanguageCode } from '@/lib/translations';
 
-export const locales = ['en', 'de'] as const;
-export const defaultLocale: LanguageCode = 'de';
+export const locales = ['de', 'en'] as const;
 export type Locale = LanguageCode;
+export const defaultLocale: Locale = 'de';
 
 export function isLocale(value: string | null | undefined): value is LanguageCode {
   return value === 'en' || value === 'de';
 }
 
-export function getLocaleFromHost(hostname: string): LanguageCode {
-  if (hostname.endsWith('.com')) return 'en';
-  if (hostname.endsWith('.de')) return 'de';
+export function resolveLocale(value: string | null | undefined): LanguageCode {
+  return isLocale(value) ? value : defaultLocale;
+}
+
+export function getLocaleFromHost(_hostname: string): LanguageCode {
   return defaultLocale;
 }
 

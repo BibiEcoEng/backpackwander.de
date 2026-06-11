@@ -11,7 +11,7 @@ export type LanguageOption = {
 export const languageOptions: LanguageOption[] = [
   {
     code: 'en',
-    flag: 'us',
+    flag: 'gb',
     label: 'English',
     shortLabel: 'EN',
     htmlLang: 'en'
@@ -246,6 +246,17 @@ export const translations = {
       brandDescriptionLines: [
         'Industrial engineering oversight, QA/QC, and offshore wind support.',
         'Technical documentation and project coordination for international industrial delivery.'
+      ],
+      brandDescriptionDesktopLines: [
+        'Industrial engineering oversight, QA/QC,',
+        'and offshore wind support. Technical',
+        'documentation and project coordination',
+        'for international industrial delivery.'
+      ],
+      brandDescriptionMobileLines: [
+        'Industrial engineering oversight, QA/QC, and offshore',
+        'wind support. Technical documentation and project',
+        'coordination for international industrial delivery.'
       ],
       navigation: 'Explore',
       companyName: 'Backpack Wander GmbH',
@@ -756,6 +767,17 @@ export const translations = {
       brandDescriptionLines: [
         'Industrielle Engineering-Überwachung, QA/QC und Offshore-Wind-Support.',
         'Technische Dokumentation und Projektkoordination für internationale industrielle Projekte.'
+      ],
+      brandDescriptionDesktopLines: [
+        'Industrielle Engineering-Überwachung, QA/QC,',
+        'und Offshore-Wind-Support. Technische',
+        'Dokumentation und Projektkoordination',
+        'für internationale industrielle Projekte.'
+      ],
+      brandDescriptionMobileLines: [
+        'Industrielle Engineering-Überwachung, QA/QC und',
+        'Offshore-Wind-Support. Technische Dokumentation und',
+        'Projektkoordination für internationale industrielle Projekte.'
       ],
       navigation: 'Entdecken',
       companyName: 'Backpack Wander GmbH',
