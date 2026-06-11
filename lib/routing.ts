@@ -13,13 +13,15 @@ export function resolveLocale(value: string | null | undefined): LanguageCode {
   return isLocale(value) ? value : defaultLocale;
 }
 
-export function getLocaleFromHost(_hostname: string): LanguageCode {
+export function getLocaleFromHost(hostname: string): LanguageCode {
+  if (hostname.endsWith('.com')) return 'en';
   return defaultLocale;
 }
 
 export function getLocaleFromPath(pathname: string): LanguageCode | null {
-  const match = pathname.match(/^\/(en|de)(?:\/|$)/);
-  return isLocale(match?.[1]) ? match[1] : null;
+  if (pathname.match(/^\/en(?:\/|$)/)) return 'en';
+  if (pathname.match(/^\/de(?:\/|$)/)) return 'de';
+  return null;
 }
 
 export function stripLocalePrefix(pathname: string): string {
@@ -27,7 +29,19 @@ export function stripLocalePrefix(pathname: string): string {
   return stripped === '' ? '/' : stripped;
 }
 
+/** Public URL shown in the browser. Default locale (de) has no prefix. */
 export function getLocalizedPath(locale: LanguageCode, pathname: string): string {
+  const strippedPath = stripLocalePrefix(pathname);
+
+  if (locale === defaultLocale) {
+    return strippedPath;
+  }
+
+  return strippedPath === '/' ? `/${locale}` : `/${locale}${strippedPath}`;
+}
+
+/** Internal Next.js route always includes the locale segment. */
+export function getInternalLocalePath(locale: LanguageCode, pathname: string): string {
   const strippedPath = stripLocalePrefix(pathname);
   return strippedPath === '/' ? `/${locale}` : `/${locale}${strippedPath}`;
 }

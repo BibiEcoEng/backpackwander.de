@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
 import { LanguageFlag } from '@/components/language-flag';
 import { useLanguage } from '@/components/language-provider';
-import { getLocalizedPath } from '@/lib/routing';
+import { getLocalizedPath, stripLocalePrefix } from '@/lib/routing';
 import { technicalDivisions } from '@/lib/site';
 
 export function Navbar() {
@@ -73,8 +73,7 @@ export function Navbar() {
       return;
     }
 
-    const pathWithoutLocale = currentPath.replace(/^\/(en|de)(?=\/|$)/, '') || '/';
-    const targetPath = pathWithoutLocale === '/' ? `/${code}` : `/${code}${pathWithoutLocale}`;
+    const targetPath = getLocalizedPath(code, stripLocalePrefix(currentPath));
     const search = window.location.search || '';
     const hash = window.location.hash || '';
     window.location.assign(`${targetPath}${search}${hash}`);

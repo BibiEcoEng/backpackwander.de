@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { siteConfig } from '@/lib/site';
-import { getLocaleFromHost, getLocaleFromPath, getLocalizedPath, isLocale } from '@/lib/routing';
+import {
+  defaultLocale,
+  getInternalLocalePath,
+  getLocalizedPath,
+  getLocaleFromPath,
+  stripLocalePrefix
+} from '@/lib/routing';
 
 const PUBLIC_FILE = /\.(.*)$/;
 
@@ -35,28 +41,31 @@ export function middleware(request: NextRequest) {
   }
 
   const host = getHost(request);
-  const hostLocale = getLocaleFromHost(host);
   const pathLocale = getLocaleFromPath(pathname);
-  const currentLocale = pathLocale ?? hostLocale;
 
-  if (pathLocale) {
-    const targetDomain = pathLocale === 'de' ? siteConfig.domains.de : siteConfig.domains.en;
-    const pathMatchesDomain = (host.endsWith('.de') && pathLocale === 'de') || (host.endsWith('.com') && pathLocale === 'en');
+  if (pathLocale === defaultLocale) {
+    const cleanPath = stripLocalePrefix(pathname);
+    const targetUrl = new URL(`${cleanPath}${search}`, request.url);
+    return NextResponse.redirect(targetUrl);
+  }
+
+  if (pathLocale === 'en') {
+    const pathMatchesDomain = host.endsWith('.com');
 
     if (!pathMatchesDomain && (host.endsWith('.de') || host.endsWith('.com'))) {
-      const targetUrl = new URL(`${getLocalizedPath(pathLocale, pathname)}${search}`, targetDomain);
+      const targetUrl = new URL(`${getLocalizedPath('en', pathname)}${search}`, siteConfig.domains.en);
       return NextResponse.redirect(targetUrl);
     }
 
-    const response = NextResponse.next({ request: { headers: withLocaleHeader(request, currentLocale) } });
-    return response;
+    return NextResponse.next({ request: { headers: withLocaleHeader(request, 'en') } });
   }
 
-  const targetPath = getLocalizedPath(currentLocale, pathname);
-  const targetUrl = new URL(`${targetPath}${search}`, request.url);
+  const internalPath = getInternalLocalePath(defaultLocale, pathname);
+  const rewriteUrl = new URL(`${internalPath}${search}`, request.url);
 
-  const response = NextResponse.redirect(targetUrl);
-  return response;
+  return NextResponse.rewrite(rewriteUrl, {
+    request: { headers: withLocaleHeader(request, defaultLocale) }
+  });
 }
 
 export const config = {

@@ -26,8 +26,8 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: canonicalUrl,
       languages: {
-        'x-default': `${siteConfig.domains.de}/de`,
-        de: `${siteConfig.domains.de}/de`,
+        'x-default': `${siteConfig.domains.de}/`,
+        de: `${siteConfig.domains.de}/`,
         en: `${siteConfig.domains.en}/en`
       }
     },
