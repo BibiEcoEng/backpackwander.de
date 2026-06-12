@@ -28,12 +28,12 @@ export function PipelineQualitySection() {
                 ))}
               </div>
 
-              <div className="mt-6">
+              <div className="section-cta-row mt-6">
                 <a
                   href={pipelineQualityUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary type-cta inline-flex w-full items-center justify-center sm:w-auto"
+                  className="section-cta-btn btn-primary type-cta inline-flex items-center justify-center sm:w-auto"
                 >
                   {section.pipeline.visit}
                 </a>
@@ -69,10 +69,10 @@ export function PipelineQualitySection() {
                 <p className="type-body mt-3 max-w-none whitespace-pre-line text-secondaryText">
                   {section.collaboration.clients.text}
                 </p>
-                <div className="mt-6">
+                <div className="section-cta-row mt-6">
                   <a
                     href="#contact"
-                    className="btn-primary type-cta inline-flex w-full items-center justify-center sm:w-auto"
+                    className="section-cta-btn btn-primary type-cta inline-flex items-center justify-center sm:w-auto"
                   >
                     {section.collaboration.clients.cta}
                   </a>
@@ -84,10 +84,10 @@ export function PipelineQualitySection() {
               <div>
                 <h3 className="section-card-title text-offwhite">{section.collaboration.network.eyebrow}</h3>
                 <p className="type-body mt-3 max-w-none text-secondaryText">{section.collaboration.network.text}</p>
-                <div className="mt-6">
+                <div className="section-cta-row mt-6">
                   <a
                     href="#contact"
-                    className="btn-primary type-cta inline-flex w-full items-center justify-center sm:w-auto"
+                    className="section-cta-btn btn-primary type-cta inline-flex items-center justify-center sm:w-auto"
                   >
                     {section.collaboration.network.cta}
                   </a>

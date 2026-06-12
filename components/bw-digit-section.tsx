@@ -28,12 +28,12 @@ export function BwDigitSection() {
               ))}
             </div>
 
-            <div className="mt-6">
+            <div className="section-cta-row mt-6">
               <a
                 href={bwDigitUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary type-cta inline-flex w-full items-center justify-center sm:w-auto"
+                className="section-cta-btn btn-primary type-cta inline-flex items-center justify-center sm:w-auto"
               >
                 {bwDigit.visit}
               </a>

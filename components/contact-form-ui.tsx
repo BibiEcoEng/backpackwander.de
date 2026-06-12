@@ -104,9 +104,25 @@ export function ContactFormUI({ variant = 'home', className = '' }: ContactFormU
         </label>
       </div>
 
-      <button type="submit" disabled={status === 'loading'} className="contact-submit btn-primary type-cta">
-        {status === 'loading' ? form.sending : labels.submit}
-      </button>
+      {isHome ? (
+        <div className="section-cta-row">
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="section-cta-btn contact-submit btn-primary type-cta"
+          >
+            {status === 'loading' ? form.sending : labels.submit}
+          </button>
+        </div>
+      ) : (
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="section-cta-btn contact-submit btn-primary type-cta"
+        >
+          {status === 'loading' ? form.sending : labels.submit}
+        </button>
+      )}
 
       {status === 'success' ? <p className="contact-status contact-status-success">{form.success}</p> : null}
       {status === 'error' ? <p className="contact-status contact-status-error">{form.error}</p> : null}

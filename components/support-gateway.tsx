@@ -14,8 +14,8 @@ export function SupportGateway({ tone = 'accent' }: SupportGatewayProps) {
 
   const triggerClassName =
     tone === 'neutral'
-      ? 'btn-secondary type-cta inline-flex items-center justify-center'
-      : 'btn-primary type-cta inline-flex items-center justify-center transition';
+      ? 'section-cta-btn btn-secondary type-cta inline-flex items-center justify-center'
+      : 'section-cta-btn btn-primary type-cta inline-flex items-center justify-center transition';
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';

@@ -8,7 +8,7 @@ import { Navbar } from '@/components/navbar';
 import { buildLocalizedPageMetadata } from '@/lib/seo';
 import { buildBreadcrumbSchema, buildContactPageSchema } from '@/lib/schema';
 import { getPageSeo, pagePaths } from '@/lib/page-metadata';
-import { isLocale, type Locale, locales } from '@/lib/routing';
+import { resolveLocale, type Locale, locales } from '@/lib/routing';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -16,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : 'en';
+  const locale = resolveLocale(rawLocale);
   const seo = getPageSeo(locale, 'contact');
 
   return buildLocalizedPageMetadata(locale, seo.title, seo.description, pagePaths.contact);
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : 'en';
+  const locale = resolveLocale(rawLocale);
 
   return (
     <>

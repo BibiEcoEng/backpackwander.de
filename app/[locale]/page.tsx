@@ -11,7 +11,7 @@ import { JsonLd } from '@/components/json-ld';
 import { buildLocalizedPageMetadata } from '@/lib/seo';
 import { buildHomeSchemaGraph } from '@/lib/schema';
 import { getPageSeo, pagePaths } from '@/lib/page-metadata';
-import { isLocale, type Locale, locales } from '@/lib/routing';
+import { resolveLocale, type Locale, locales } from '@/lib/routing';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -19,7 +19,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : 'en';
+  const locale = resolveLocale(rawLocale);
   const seo = getPageSeo(locale, 'home');
 
   return buildLocalizedPageMetadata(locale, seo.title, seo.description, pagePaths.home);
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
-  const locale: Locale = isLocale(rawLocale) ? rawLocale : 'en';
+  const locale = resolveLocale(rawLocale);
 
   return (
     <>

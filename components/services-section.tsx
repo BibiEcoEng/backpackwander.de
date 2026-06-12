@@ -52,10 +52,10 @@ export function ServicesSection() {
           </div>
         </div>
 
-        <div className="services-cta-row mt-8 flex justify-center">
+        <div className="section-cta-row mt-8">
           <a
             href="#contact"
-            className="services-cta-btn btn-primary type-cta inline-flex w-full max-w-sm items-center justify-center lg:w-auto"
+            className="section-cta-btn btn-primary type-cta inline-flex items-center justify-center sm:w-auto"
           >
             {section.cta}
           </a>

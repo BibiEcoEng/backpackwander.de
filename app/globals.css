@@ -82,6 +82,13 @@ li {
   --logo-silver-rgb: 209, 217, 222;
   --text-main-rgb: 245, 245, 243;
   --nav-link-peach: #F2D5C4;
+  /* Desktop CTA — Pipeline Quality reference proportions */
+  --cta-desktop-width: 18.5rem;
+  --cta-desktop-height: 3.5rem;
+  --cta-desktop-padding-inline: 1.75rem;
+  --cta-desktop-font-size: 18px;
+  --cta-desktop-line-height: 1.2;
+  --cta-desktop-radius: 6px;
 }
 
 @media (min-width: 768px) {
@@ -265,23 +272,13 @@ main {
   }
 
   #industries.section-padding {
-    padding-top: 1.25rem;
+    padding-top: 0.5rem;
     padding-bottom: 2.5rem;
   }
 
-  #services .services-cta-row {
+  #services .section-cta-row {
     margin-top: 1.5rem;
     margin-bottom: 0.25rem;
-    justify-content: center;
-  }
-
-  #services .services-cta-btn {
-    width: auto !important;
-    max-width: none;
-    padding: 12px 22px !important;
-    font-size: 15px;
-    line-height: 1.5;
-    white-space: nowrap;
   }
 
   .section-title,
@@ -297,9 +294,26 @@ main {
     gap: 1rem;
   }
 
-  #services .section-card {
+  .section-card {
     padding: 1.25rem;
     border-radius: 12px;
+  }
+
+  .bw-digit-panel {
+    border-radius: 12px;
+  }
+
+  .bw-digit-panel-inner {
+    padding: 1.25rem;
+  }
+
+  .industries-panel {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+
+  #pipeline-quality .section-content > .grid {
+    gap: 1rem;
   }
 
   .section-card-title,
@@ -372,6 +386,14 @@ main {
 .bw-digit-panel-title {
   margin: 0;
   text-align: left;
+}
+
+.bw-digit-panel-title .section-block-title-line + .section-block-title-line {
+  color: var(--logo-accent-button);
+}
+
+.bw-digit-panel-title .section-block-title-line + .section-block-title-line .highlight-green {
+  color: inherit;
 }
 
 .bw-digit-panel-text {
@@ -1037,6 +1059,10 @@ main {
   margin-bottom: 1.25rem;
 }
 
+.hero-copy .hero-cta-group {
+  margin-top: 0.25rem;
+}
+
 .hero-cta-group {
   display: flex;
   flex-direction: column;
@@ -1047,16 +1073,6 @@ main {
 }
 
 @media (max-width: 639px) {
-  section#home .hero-cta-group .type-cta {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 20rem;
-    margin-inline: auto;
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: center;
-  }
-
   section#home .hero-title-wrap {
     margin-bottom: 1rem;
   }
@@ -1096,11 +1112,13 @@ main {
 
 @media (min-width: 640px) {
   .hero-copy .hero-subtitle {
-    margin-bottom: 2.25rem;
+    margin-bottom: 2.75rem;
   }
-}
 
-@media (min-width: 640px) {
+  .hero-copy .hero-cta-group {
+    margin-top: 1.25rem;
+  }
+
   .hero-cta-group {
     flex-direction: row;
     flex-wrap: nowrap;
@@ -1481,6 +1499,21 @@ main {
   box-shadow: none !important;
 }
 
+.section-cta-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+#services .section-cta-row {
+  justify-content: center;
+}
+
+.hero-cta-group.section-cta-row {
+  justify-content: center;
+  align-items: center;
+}
+
 /* Secondary Style Button (e.g., "Explore Services" / "Join Our Network") */
 .cta-outline,
 .btn-secondary {
@@ -1504,6 +1537,154 @@ main {
   background-color: #5eead4 !important;
   color: #111111 !important;
   box-shadow: none !important;
+}
+
+@media (max-width: 639px) {
+  .section-cta-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-cta-btn,
+  a.section-cta-btn,
+  button.section-cta-btn,
+  a.btn-primary.type-cta,
+  button.btn-primary.type-cta,
+  section#home .hero-cta-group .type-cta,
+  .contact-section-form .contact-submit {
+    box-sizing: border-box;
+    display: inline-flex !important;
+    width: min(100%, 18.5rem) !important;
+    min-width: 0 !important;
+    max-width: 18.5rem;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin-inline: auto;
+    padding: 12px 22px !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    text-align: center;
+    white-space: normal;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .section-cta-btn.btn-secondary,
+  a.btn-secondary.type-cta,
+  button.btn-secondary.type-cta,
+  section#home .hero-cta-group .btn-secondary {
+    padding: 10px 22px !important;
+    border-width: 2px !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+  }
+
+  section#home .hero-cta-group {
+    width: 100%;
+    align-items: center;
+  }
+
+  section#home .hero-copy .hero-cta-group {
+    align-self: center;
+  }
+
+  .contact-section-form .section-cta-row {
+    margin-top: 1.25rem;
+    justify-content: center;
+  }
+
+  .contact-section-form .section-cta-row .contact-submit {
+    margin-top: 0;
+  }
+}
+
+/* Desktop CTA — identical size, padding, and proportions everywhere */
+@media (min-width: 640px) {
+  .section-cta-btn,
+  a.section-cta-btn,
+  button.section-cta-btn,
+  a.btn-primary.type-cta,
+  button.btn-primary.type-cta,
+  .contact-section-form .contact-submit {
+    box-sizing: border-box;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: var(--cta-desktop-width) !important;
+    min-width: var(--cta-desktop-width) !important;
+    max-width: var(--cta-desktop-width) !important;
+    height: var(--cta-desktop-height) !important;
+    min-height: var(--cta-desktop-height) !important;
+    max-height: var(--cta-desktop-height) !important;
+    margin: 0 !important;
+    padding: 0 var(--cta-desktop-padding-inline) !important;
+    font-family: var(--font-inter), sans-serif !important;
+    font-weight: 600 !important;
+    font-size: var(--cta-desktop-font-size) !important;
+    line-height: var(--cta-desktop-line-height) !important;
+    border-radius: var(--cta-desktop-radius) !important;
+    white-space: nowrap;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .section-cta-btn.btn-secondary,
+  a.btn-secondary.type-cta,
+  button.btn-secondary.type-cta {
+    width: var(--cta-desktop-width) !important;
+    min-width: var(--cta-desktop-width) !important;
+    max-width: var(--cta-desktop-width) !important;
+    height: var(--cta-desktop-height) !important;
+    min-height: var(--cta-desktop-height) !important;
+    max-height: var(--cta-desktop-height) !important;
+    padding: 0 calc(var(--cta-desktop-padding-inline) - 2px) !important;
+    border-width: 2px !important;
+    font-size: var(--cta-desktop-font-size) !important;
+    line-height: var(--cta-desktop-line-height) !important;
+    white-space: nowrap;
+  }
+
+  .section-cta-row:not(.hero-cta-group) {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .section-cta-row:not(.hero-cta-group) .section-cta-btn,
+  .section-cta-row:not(.hero-cta-group) .btn-primary.type-cta,
+  .section-cta-row:not(.hero-cta-group) .btn-secondary.type-cta {
+    align-self: flex-start;
+  }
+
+  #services .section-cta-row {
+    justify-content: center;
+    align-items: center;
+  }
+
+  #services .section-cta-row .section-cta-btn {
+    align-self: center;
+  }
+
+  .hero-cta-group.section-cta-row {
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-cta-group .section-cta-btn {
+    align-self: center;
+  }
+
+  .contact-section-form .section-cta-row {
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.25rem;
+  }
+
+  .contact-section-form .section-cta-row .section-cta-btn {
+    align-self: center;
+    margin-inline: auto;
+  }
 }
 
 /* highlighted accent text */
@@ -1616,6 +1797,22 @@ h6 {
 #pipeline-quality .section-card {
   border: 1px solid var(--logo-accent-border);
   background-color: var(--bg-primary);
+}
+
+#pipeline-quality .section-content > .grid > .section-card {
+  display: flex;
+  flex-direction: column;
+}
+
+#pipeline-quality .section-content > .grid > .section-card > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#pipeline-quality .section-content > .grid > .section-card .section-cta-row {
+  margin-top: auto;
+  padding-top: 1.5rem;
 }
 
 @media (min-width: 1024px) {
@@ -1778,9 +1975,10 @@ h6 {
     text-align: left;
     line-height: 1.65;
     letter-spacing: normal;
-    text-wrap: wrap;
-    overflow-wrap: anywhere;
+    text-wrap: pretty;
+    overflow-wrap: break-word;
     word-break: normal;
+    hyphens: none;
   }
 
   .footer-brand-copy::after {
@@ -2991,11 +3189,9 @@ a.footer-contact-link:hover {
 }
 
 .contact-section-form .contact-submit {
-  width: 100%;
-  margin-top: 1.25rem;
   border-radius: 6px !important;
-  padding: 16px 32px !important;
 }
+
 
 .contact-section-form .contact-status {
   text-align: center;

@@ -10,18 +10,18 @@ export type LanguageOption = {
 
 export const languageOptions: LanguageOption[] = [
   {
-    code: 'en',
-    flag: 'gb',
-    label: 'English',
-    shortLabel: 'EN',
-    htmlLang: 'en'
-  },
-  {
     code: 'de',
     flag: 'de',
     label: 'German',
     shortLabel: 'DE',
     htmlLang: 'de'
+  },
+  {
+    code: 'en',
+    flag: 'gb',
+    label: 'English',
+    shortLabel: 'EN',
+    htmlLang: 'en'
   }
 ];
 
@@ -560,7 +560,7 @@ export const translations = {
       selectLanguage: 'Sprache auswählen'
     },
     hero: {
-      headline: 'Engineering-Unterstützung für Offshore- & Industrieprojekte',
+      headline: 'Engineering Unterstützung für Offshore & Industrieprojekte',
       subheadline: 'Backpack Wander GmbH bietet Qualitätssicherung, Qualitätskontrolle, Inspektion',
       subheadline2: 'support und Projektkoordination in den Bereichen Offshore, Energie,',
       subheadline3: 'Fertigung und Industrie.',
@@ -775,9 +775,10 @@ export const translations = {
         'für internationale industrielle Projekte.'
       ],
       brandDescriptionMobileLines: [
-        'Industrielle Engineering-Überwachung, QA/QC und',
-        'Offshore-Wind-Support. Technische Dokumentation und',
-        'Projektkoordination für internationale industrielle Projekte.'
+        'Industrielle Engineering-Überwachung,',
+        'QA/QC und Offshore-Wind-Support.',
+        'Technische Dokumentation und Projektkoordination',
+        'für internationale industrielle Projekte.'
       ],
       navigation: 'Entdecken',
       companyName: 'Backpack Wander GmbH',
