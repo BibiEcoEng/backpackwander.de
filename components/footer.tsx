@@ -50,13 +50,7 @@ export function Footer() {
                   </span>
                 ))}
               </span>
-              <span className="footer-brand-copy-mobile">
-                {content.footer.brandDescriptionMobileLines.map((line) => (
-                  <span key={line} className="footer-brand-copy-line">
-                    {line}
-                  </span>
-                ))}
-              </span>
+              <span className="footer-brand-copy-mobile">{content.footer.brandDescription}</span>
             </p>
             <ul className="footer-divisions">
               {technicalDivisions.map((division) => (

@@ -1962,16 +1962,9 @@ h6 {
   }
 
   .footer-brand-copy-mobile {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    width: 100%;
-  }
-
-  .footer-brand-copy-mobile .footer-brand-copy-line {
     display: block;
     width: 100%;
+    max-width: 100%;
     text-align: left;
     line-height: 1.65;
     letter-spacing: normal;
@@ -1979,6 +1972,7 @@ h6 {
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: none;
+    white-space: normal;
   }
 
   .footer-brand-copy::after {
@@ -2203,7 +2197,7 @@ h6 {
   }
 
   .footer-brand-copy {
-    max-width: none;
+    max-width: 26rem;
     color: var(--offwhite);
     line-height: 1.7;
     text-align: left;
@@ -2215,10 +2209,16 @@ h6 {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
+    width: 100%;
+    max-width: 26rem;
+    text-align: left;
   }
 
   .footer-brand-copy-line {
     display: block;
+    width: 100%;
+    text-align: left;
+    line-height: 1.7;
     white-space: nowrap;
     text-wrap: nowrap;
   }
@@ -2417,6 +2417,14 @@ h6 {
 
 .footer-brand-copy-mobile {
   display: block;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+  white-space: normal;
 }
 
 .footer-divisions {
